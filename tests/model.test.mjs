@@ -1,21 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLines } from '../web/model.mjs';
-test('trims, removes blanks and preserves first-seen order', () => {
-  assert.deepEqual(cleanLines('  Halifax\nLangley\nHalifax\n\nVancouver  '), {
-    text: 'Halifax\nLangley\nVancouver', count: 3, removed: 1,
-  });
-});
-test('supports Windows and old Mac line endings', () => {
-  assert.equal(cleanLines('a\r\nb\ra').text, 'a\nb');
-});
-test('empty text and whitespace produce an empty result', () => {
-  assert.deepEqual(cleanLines(' \n\t'), { text: '', count: 0, removed: 0 });
-});
-test('preserves case and Unicode', () => {
-  assert.equal(cleanLines('Québec\nquébec\n東京\nQuébec').text, 'Québec\nquébec\n東京');
-});
-test('treats markup as ordinary text', () => {
-  assert.equal(cleanLines('<script>alert(1)</script>\n<script>alert(1)</script>').text, '<script>alert(1)</script>');
-});
-test('rejects non-text input', () => { assert.throws(() => cleanLines(null), TypeError); });
+import {amount,compare,convertInputs,readScenario,csvCell} from '../web/model.mjs';
+const cats=[{id:'food',label:'Food'},{id:'health',label:'Health'}];
+const profile={values:{food:{annual:12000,status:''},health:{annual:null,status:'F'}}};
+test('blank means unknown while zero is an entered amount',()=>{assert.equal(amount(''),null);assert.equal(amount(' '),null);assert.equal(amount('0'),0);assert.equal(compare(cats,{food:''},profile).count,0);assert.equal(compare(cats,{food:'0'},profile).count,1);});
+test('monthly comparison matches only available entered categories',()=>{const r=compare(cats,{food:1200,health:100},profile);assert.equal(r.yours,1200);assert.equal(r.benchmark,1000);assert.equal(r.difference,200);assert.equal(r.count,1);assert.equal(r.entered,2);assert.equal(r.rows[1].reference,null);assert.equal(r.rows[1].difference,null);});
+test('annual and monthly have equivalent totals',()=>{const monthly={food:1000,health:''};const annual=convertInputs(monthly,'monthly','annual');assert.equal(annual.food,12000);assert.equal(annual.health,'');assert.equal(compare(cats,annual,profile,'annual').difference,0);assert.equal(convertInputs(annual,'annual','monthly').food,1000);});
+test('rejects negative, overflow, infinite and nonnumeric values',()=>{for(const v of [-1,Infinity,NaN,'oops',{},[],5000001])assert.throws(()=>amount(v));assert.throws(()=>compare(cats,{},profile,'weekly'));});
+test('additional configured categories are counted without hardcoded limits',()=>{const expanded=[...cats,{id:'education',label:'Education'}];const p={values:{...profile.values,education:{annual:2400,status:'E'}}};const r=compare(expanded,{food:1000,education:200},p);assert.equal(r.count,2);assert.equal(r.benchmark,1200);assert.equal(r.rows[2].status,'E');});
+test('zero benchmark has no misleading percentage',()=>{assert.equal(compare(cats,{food:10},{values:{food:{annual:0}}}).rows[0].percent,null);});
+test('scenario import validates and preserves missing values',()=>{const s=readScenario({schema_version:1,tool:'budgetmirror',period:'monthly',inputs:{food:123,extra:999}},['food','health']);assert.deepEqual(s.inputs,{food:123,health:''});for(const v of [null,{}, {schema_version:1,tool:'budgetmirror',period:'monthly',inputs:null}])assert.throws(()=>readScenario(v,['food']));});
+test('CSV escapes quotes and neutralizes string spreadsheet formulas',()=>{assert.equal(csvCell('a"b'),'"a""b"');assert.equal(csvCell('=1+1'),'"\'=1+1"');assert.equal(csvCell(-100),'"-100"');});

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-11-25T10:45:17Z",
+  "profile_count": 1147,
+  "sources": [
+    {
+      "table": "11100222",
+      "latest_reference_year": "2023"
+    },
+    {
+      "table": "11100233",
+      "latest_reference_year": "2023"
+    },
+    {
+      "table": "11100223",
+      "latest_reference_year": "2023"
+    },
+    {
+      "table": "11100224",
+      "latest_reference_year": "2023"
+    },
+    {
+      "table": "11100225",
+      "latest_reference_year": "2023"
+    }
+  ]
+}

@@ -1,16 +1,20 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "budgetmirror",
+  "title": "Budget Mirror",
+  "description": "Compare your household spending with published Canadian averages, privately in your browser.",
+  "category": "money",
+  "tags": [
+    "Canada",
+    "household",
+    "budget"
+  ],
+  "icon": "wallet",
+  "url": "/budgetmirror/",
+  "source": "https://github.com/jsdyer/budgetmirror",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "mixed",
+    "detail": "Statistics Canada household spending averages, with private comparisons calculated in your browser."
   }
 }

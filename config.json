@@ -1,0 +1,25 @@
+{
+  "tables": [
+    {"id":"11100222","mode":"geography","label":"Province or region","dimension":null},
+    {"id":"11100233","mode":"geography","label":"Territorial capital","dimension":null},
+    {"id":"11100223","mode":"income","label":"Income quintile","dimension":"Before-tax household income quintile"},
+    {"id":"11100224","mode":"household","label":"Household type","dimension":"Household type"},
+    {"id":"11100225","mode":"tenure","label":"Housing tenure","dimension":"Household tenure"}
+  ],
+  "categories": [
+    {"id":"food","label":"Food","source":"Food expenditures","hint":"Groceries, restaurants, snacks and meal-delivery services."},
+    {"id":"shelter","label":"Shelter","source":"Shelter","hint":"Rent or mortgage payments, utilities, property taxes, home insurance, repairs and accommodation away from home."},
+    {"id":"operations","label":"Household operations","source":"Household operations","hint":"Phone, internet, digital services, child care, pets, cleaning and garden supplies/services."},
+    {"id":"furnishings","label":"Furnishings & equipment","source":"Household furnishings and equipment","hint":"Furniture, appliances, tools and related repairs."},
+    {"id":"clothing","label":"Clothing & accessories","source":"Clothing and accessories","hint":"Clothing, shoes, jewellery and clothing services."},
+    {"id":"transport","label":"Transportation","source":"Transportation","hint":"Vehicle purchases/leases, fuel, insurance, maintenance, transit and flights. Large purchases can make averages uneven."},
+    {"id":"health","label":"Health care","source":"Health care","hint":"Out-of-pocket medicine, dental, vision, health services and private insurance premiums."},
+    {"id":"personal","label":"Personal care","source":"Personal care","hint":"Personal care products, haircuts and other personal services."},
+    {"id":"recreation","label":"Recreation","source":"Recreation","hint":"Hobbies, electronics, sports, entertainment, television services and package trips."},
+    {"id":"education","label":"Education","source":"Education","hint":"Tuition, courses, textbooks and school supplies."},
+    {"id":"reading","label":"Reading materials","source":"Reading materials and other printed matter","hint":"Books, newspapers, magazines and related services; school books belong in Education."},
+    {"id":"alcohol","label":"Alcohol, tobacco & cannabis","source":"Tobacco products, alcoholic beverages and cannabis for non-medical use","hint":"Includes purchases from stores and licensed premises; do not also count these in Food."},
+    {"id":"games","label":"Games of chance","source":"Games of chance","hint":"Lottery tickets, bingo and other gambling expenditures."},
+    {"id":"misc","label":"Miscellaneous","source":"Miscellaneous expenditures","hint":"Financial services, dues, legal fees and other miscellaneous spending."}
+  ]
+}
